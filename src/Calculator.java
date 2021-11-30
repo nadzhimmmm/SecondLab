@@ -1,25 +1,34 @@
 import java.util.EmptyStackException;
 import java.util.Scanner;
 import java.util.Stack;
+
 /**
  * @author Mokhammad Nadzhim
  * @version 1.0
  */
+
 /**
  * A class that parses an expression and gets its value
  */
-
 public class Calculator {
     /**
      * The field in which we save the answer
      */
-
      static Double ANSWER;
-     static String expression;
-     Calculator(String _expression)
-     {
-         expression=_expression;
-     }
+
+    /**
+     * The field that stores the original expression
+     */
+    static String expression;
+
+    /**
+     * Class constructor
+     * @param _expression the original expression
+     */
+    Calculator(String _expression)
+    {
+        expression=_expression;
+    }
 
 
     /**
@@ -42,9 +51,10 @@ public class Calculator {
             return 1;
         } else return 0;
     }
+
     /**
-     *
-     * @return
+     * The method that checks the correctness of the input
+     * @return 1 if entered correctly, 0 otherwise
      */
     static int check1() {
         int k = 0;
@@ -62,8 +72,10 @@ public class Calculator {
 
     }
 
-
-
+    /**
+     * A method that translates the original expression into a postfix form
+     * @return expression in a postfix entry
+     */
     public static String our_example_to_postfix()  {
         String postfix = "";
         Stack<Character> stack = new Stack();
@@ -100,38 +112,7 @@ public class Calculator {
         return postfix;
     }
 
-    /**
-     *
-     * @return
-     */
-    public static String our_example_to_postfix1()  {
-        String postfix = "";
-        Stack<Character> stack = new Stack();
-        int priority;
-        for (int i = 0; i < expression.length(); i++) {
-            priority = get_priority(expression.charAt(i));
-            if (priority==0)
-                postfix += expression.charAt(i);
-            else if (priority == 1)
-                stack.push(expression.charAt(i));
-            else if (priority > 1) {
-                postfix += " ";
-                while (!stack.isEmpty()) {
-                    if (get_priority(stack.peek()) >= priority)
-                        postfix += stack.pop();
-                    else break;
-                }
-                stack.push(expression.charAt(i));
-            } else if (priority == -1) {
-                postfix += " ";
-                while (get_priority(stack.peek()) != 1)
-                    postfix += stack.pop();
-                stack.pop();
-            }
-        }
-        while (!stack.empty()) postfix += stack.pop();
-        return postfix;
-    }
+
 
     /**
      * A method that searches for a solution to the original expression using a postfix entry
@@ -188,16 +169,11 @@ public class Calculator {
 
     }
 
-
-
-
     /**
      * The method that solves the expression
-     * @throws Exception if incorrect is entered
-     * @return
+     * @return solving the expression
+     * @throws Exception invalid input
      */
-
-
     public static double getting_a_solution() throws Exception {
 
         if (check1() == 1 && check() == 1) {
@@ -235,6 +211,11 @@ public class Calculator {
             return expression;
     }
 
+    /**
+     * Redefined method equals
+     * @param o the object being compared
+     * @return 1 if equal, 0 otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if(this==o) return true;
@@ -243,11 +224,19 @@ public class Calculator {
         return this.ANSWER==calculator.ANSWER;
     }
 
+    /**
+     * Redefined method toString
+     * @return expression response
+     */
     @Override
     public String toString() {
         return String.valueOf(ANSWER);
     }
 
+    /**
+     * Redefined method hashCode
+     * @return hashCode
+     */
     @Override
     public int hashCode() {
         return super.hashCode();
