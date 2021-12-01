@@ -3,7 +3,8 @@ import java.util.Scanner;
 import java.util.NoSuchElementException;
 public class Main
 {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception
+    {
         System.out.println("1)Ввести выражение.");
         System.out.println("0)Выход.");
         Scanner in = new Scanner(System.in);
@@ -22,11 +23,6 @@ public class Main
             Scanner scan = new Scanner(System.in);
             String example=scan.nextLine();
             new Calculator(example);
-            while(Calculator.check() !=1|| Calculator.check1()!=1)
-            {
-                System.out.println("Ошибка.Неверный ввод. Повторите попытку.");
-                example = scan.nextLine();
-            }
             System.out.print("Ответ:");
             System.out.println(Calculator.getting_a_solution());
             System.out.println("1)Ввести выражение.");
